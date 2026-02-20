@@ -1,5 +1,5 @@
 module github.com/rusq/withenv
 
-go 1.15
+go 1.23
 
-require github.com/joho/godotenv v1.3.0
+require github.com/joho/godotenv v1.5.1

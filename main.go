@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"syscall"
 
 	"github.com/joho/godotenv"
 )
@@ -35,6 +36,9 @@ func main() {
 		e, ok := err.(*exec.ExitError)
 		if !ok {
 			log.Fatal(err)
+		}
+		if status, ok := e.Sys().(syscall.WaitStatus); ok && status.Signaled() {
+			os.Exit(128 + int(status.Signal()))
 		}
 		os.Exit(e.ExitCode())
 	}
