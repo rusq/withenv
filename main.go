@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"flag"
 	"log"
 	"os"
@@ -33,8 +34,8 @@ func main() {
 	cmd.Stderr = os.Stderr
 	err := cmd.Run()
 	if err != nil {
-		e, ok := err.(*exec.ExitError)
-		if !ok {
+		var e *exec.ExitError
+		if !errors.As(err, &e) {
 			log.Fatal(err)
 		}
 		if status, ok := e.Sys().(syscall.WaitStatus); ok && status.Signaled() {
