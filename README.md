@@ -22,3 +22,22 @@ desired name, i.e.:
 ```shell
 withenv -f .i_dont_like_default_names env
 ```
+
+## Installation
+```
+go install github.com/rusq/withenv@latest
+```
+
+## Usage with OpenCode
+
+This may be useful with different MCPs that require secrets being available in
+the environment.  For example, Github MCP.
+
+In the opencode project directory:
+1. Create a `.gitignore` file, and/or add to it the following line:
+   ```
+   .env
+   ```
+1. Create an `.env` file in the opencode project, and add secrets to it.
+1. Start opencode as: `withenv opencode`.  This will propagate environment
+   variables, i.e. secrets to environment of the opencode.
